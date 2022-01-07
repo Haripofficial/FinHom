@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="input-notes">
+        <textarea id="input-notes"></textarea>
+        <button onclick="setNotes()">OK</button>
+        <button onclick={localStorage.clear()}>clear all data !!</button>
+    </div>
+    <div id="root">
+    </div>
+    <div>
+        <h1 id='total'></h1>
+    </div>
+</body>
+<script>
+    function setNotes() {
+        console.log(document.getElementById('input-notes').getAttribute('pointer'))
+        myMaths = JSON.parse(localStorage.myMaths)
+        myMaths.notes[document.getElementById('input-notes').getAttribute('pointer')] = document.getElementById('input-notes').value;
+        setLocal(myMaths)
+    }
+    function clear() {
+            localStorage.clear()
+      
+        
+    }
+    function setLocal(myMaths) {
+        localStorage.setItem('myMaths', JSON.stringify(myMaths))
+    }
+
+    var myMaths = {
+        total: 0,
+        month: [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0
+        ],
+        notes: [
+            "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note",
+            "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note",
+            "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note", "write note",
+            "write note"
+        ]
+    }
+    localStorage.myMaths ? {} :
+        (setLocal(myMaths));
+    myMaths = JSON.parse(localStorage.myMaths)
+    var total = myMaths.total;
+    let month = myMaths.month;
+
+    document.getElementById('total').innerText = total
+
+    function setValue(id, bol) {
+        myMaths = JSON.parse(localStorage.myMaths)
+        month = myMaths.month;
+        var Inc;
+        switch (bol) {
+            case 0:
+                month[id] = 1;
+                Inc = 45
+                break
+            case 1:
+                month[id] = 2;
+                Inc = 45
+                break
+            default:
+                month[id] = 0;
+                Inc = -90
+        }
+
+        total = myMaths.total + Inc
+
+        myMaths.total = total;
+        myMaths.month.id = !bol;
+        setLocal(myMaths)
+        window.location.reload();
+    }
+    function write(item, index) {
+        const day = document.createElement('div');
+        day.classList.add('day')
+        day.setAttribute('id', item)
+        if (index % 7 == 1 | index % 7 == 0) {
+            day.classList.add('weekend')
+        }
+        day.addEventListener("click", () => setValue(index, item));
+
+        day.addEventListener("touchstart", () => { tId = setTimeout(console, 1000) })
+        day.addEventListener("mousedown", () => { tId = setTimeout(console, 1000) })
+        // day.addEventListener("mouseup", clearTimeout(tId));
+
+        function console() {
+            document.getElementById('input-notes').focus;
+            document.getElementById('input-notes').setAttribute('pointer', index);
+            document.getElementById('input-notes').value = JSON.parse(localStorage.myMaths).notes[index];
+        }
+
+        switch (item) {
+            case 1:
+                day.classList.add('half')
+                break
+            case 2:
+                day.classList.add('full')
+                break
+            default:
+            // ['full','half'].forEach(item => elem.classList.remove(item));
+        }
+
+        day.innerHTML = `
+                ${index + 1}${item ? '*' : ''}
+                `
+        document.getElementById('root').append(day)
+    }
+    month.forEach(write);
+</script>
+<style>
+    .day {
+        width: 13vw;
+        aspect-ratio: 1;
+        justify-content: space-around;
+        background-color: #dbc8c1;
+        color: #1b1a15;
+        border-radius: 50%;
+        justify-content: center;
+        display: flex;
+        margin: 1.5px;
+        align-items: center;
+        box-shadow: -2px 5px #888888;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .day:hover {
+        filter: brightness(70%);
+    }
+
+    #root {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .weekend {
+        background-color: rgb(25, 201, 93);
+    }
+
+    .half {
+        background-color: aquamarine;
+    }
+
+    .full {
+        background-color: blue !important;
+    }
+
+    /* .model {
+        position: absolute;
+        width: 100vw;
+        height: 100vw;
+        background-color: rgb(15, 15, 15);
+        opacity: 0.4;
+        display: flex;
+        justify-content: center;
+    }
+
+    .model div {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+    } */
+</style>
+
+</html>
