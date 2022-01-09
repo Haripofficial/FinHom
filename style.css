@@ -1,0 +1,52 @@
+.day {
+    width: 13vw;
+    aspect-ratio: 1;
+    justify-content: space-around;
+    background-color: #dbc8c1 !important;
+    color: #1b1a15;
+    justify-content: center;
+    display: flex;
+    margin: 1.5px;
+    align-items: center;
+    box-shadow: -2px 5px #888888;
+    cursor: pointer;
+    user-select: none;
+    transition: all 1s;
+}
+
+.day:hover {
+    filter: brightness(70%);
+}
+
+#root {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.weekend {
+    background-color: rgb(25, 201, 93) !important;
+}
+
+.half {
+    background-color: aquamarine !important;
+    transform: rotateY(360deg);
+
+}
+
+.full {
+    background-color: blue !important;
+}
+
+.note-added {
+    background: url(./comment-alt-solid.svg);
+    background-size: 30px 10px;
+    background-position: 100% 10%;
+    background-repeat: no-repeat;
+}
+span{
+    opacity: 0.5;
+}
+.red{
+    color: red;
+    opacity: 1;
+}
