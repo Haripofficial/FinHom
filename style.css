@@ -18,6 +18,14 @@
     filter: brightness(70%);
 }
 
+
+.logo-sec {
+    color: rgba(6, 73, 73, 0.815);
+    text-align: center;
+    
+
+}
+
 #root {
     display: flex;
     flex-wrap: wrap;
@@ -50,3 +58,14 @@ span{
     color: red;
     opacity: 1;
 }
+
+.input-notes{
+    background-color: #1b1a15;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
